@@ -87,12 +87,19 @@
     place-items: center;
   }
 
-  .logo-badge span {
-    font-family: "Cinzel", "Zilla Slab", Georgia, serif;
-    font-weight: 700;
-    font-size: 1.2rem;
-    color: var(--gold-soft);
-    transform: translateY(-1px);
+  .logo-badge svg {
+    overflow: visible;
+  }
+
+  .logo-badge .logo-desk {
+    fill: var(--gold-soft);
+    stroke: var(--accent-strong);
+    stroke-width: 0.6;
+  }
+
+  .logo-badge .logo-chair {
+    fill: var(--gold);
+    opacity: 0.85;
   }
 
   header.top h1 {
