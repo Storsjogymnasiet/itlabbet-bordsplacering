@@ -515,12 +515,19 @@
           statusEl.textContent = 'Kunde inte skapa bilden.';
           return;
         }
-        saveBlob(blob, btn, statusEl);
+        saveBlob(blob, btn, statusEl, exportFilename());
       }, 'image/png');
     });
   }
 
-  function saveBlob(blob, btn, statusEl) {
+  function exportFilename() {
+    var cls = classSelectEl.value === CUSTOM_VALUE ? 'egen-lista' : classSelectEl.value;
+    var d = new Date();
+    var date = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+    return cls + '-' + date + '.png';
+  }
+
+  function saveBlob(blob, btn, statusEl, filename) {
     btn.disabled = true;
     statusEl.textContent = 'Sparar…';
 
@@ -530,7 +537,7 @@
     if (window.claude && typeof window.claude.use === 'function') {
       window.claude.use('downloads').then(function (downloads) {
         if (downloads) {
-          downloads.save({ filename: 'bordsplacering.png', data: blob }).then(function () {
+          downloads.save({ filename: filename, data: blob }).then(function () {
             statusEl.textContent = 'Sparad ✓';
             btn.disabled = false;
             setTimeout(function () { statusEl.textContent = ''; }, 2500);
@@ -543,18 +550,18 @@
             else statusEl.textContent = 'Kunde inte spara bilden.';
           });
         } else {
-          directDownload(blob, btn, statusEl);
+          directDownload(blob, btn, statusEl, filename);
         }
       });
     } else {
-      directDownload(blob, btn, statusEl);
+      directDownload(blob, btn, statusEl, filename);
     }
   }
 
-  function directDownload(blob, btn, statusEl) {
+  function directDownload(blob, btn, statusEl, filename) {
     var a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
-    a.download = 'bordsplacering.png';
+    a.download = filename;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
