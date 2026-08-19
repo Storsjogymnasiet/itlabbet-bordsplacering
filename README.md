@@ -1,6 +1,6 @@
 # Bordsplacerare
 
-En liten webbapp för att slumpa fram bordsplaceringar i ett klassrum. Allt körs i webbläsaren — ingen backend, ingen databas.
+En liten webbapp för att slumpa fram bordsplaceringar i IT-labbet. Allt körs i webbläsaren — ingen backend, ingen databas.
 
 **Live:** https://storsjogymnasiet.github.io/itlabbet-bordsplacering/
 
